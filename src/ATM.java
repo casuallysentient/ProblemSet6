@@ -94,6 +94,14 @@ public class ATM {
 
       System.out.print("\nLast name: ");
       newLastName = in.next().strip();
+
+      if ((newFirstName.length() < 1 || newFirstName.length() > 20 || newLastName.length() < 1 || newLastName.length() > 30) && !newFirstName.equals("-1") && !newLastName.equals("-1")) {
+        System.out.println("Invalid first or last name. Your first name must be between 1 and 20 characters");
+        System.out.println("and your last name must be between 1 and 30 characters. Enter -1 in either of the name fields to exit.");
+      } else if (newFirstName.equals("-1") || newLastName.equals("-1")) {
+        System.out.println("\nExiting account creator...");
+        return;
+      }
     }
   }
 
@@ -147,7 +155,7 @@ public class ATM {
     System.out.print("\nEnter amount: ");
     double amount = in.nextDouble();
 
-    int status = activeAccount.transfer(destination, amount);
+    int status = activeAccount.transfer(activeAccount, destination, amount);
     if (status == ATM.ACCOUNT_NOT_FOUND) {
       System.out.println("\nTransfer rejected. Destination account not found.");
     } else if (status == ATM.RECURSIVE_TRANSFER) {

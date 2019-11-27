@@ -1,4 +1,8 @@
+import java.text.NumberFormat;
+
 public class BankAccount {
+
+  private static long prevAccountNo = 100000000L;
 
     private int pin;
     private long accountNo;
@@ -38,7 +42,7 @@ public class BankAccount {
         balance = balance - amount;
     }
 
-    public void transfer(BankAccount destination, double amount) {
+    public void transfer(BankAccount activeAccount, BankAccount destination, double amount) {
       if (destination == null) {
         return ATM.ACCOUNT_NOT_FOUND;
       } else if (destination = activeAccount) {
