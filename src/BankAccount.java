@@ -46,7 +46,7 @@ public class BankAccount {
       } else if (amount > balance) {
         return ATM.INSUFFICIENT;
       } else if (amount + destination.balance > Bank.MAX_BALANCE) {
-        return ATM.MAX_BALANCE_REACHED;
+        return ATM.OVERFLOW;
       } else {
         balance = balance - amount;
         destination.balance = destination.balance + amount;

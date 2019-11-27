@@ -3,8 +3,6 @@ public class User {
     private String firstName;
     private String lastName;
 
-
-
     /**
      * Formats the first and last name in preparation to be written to the data file.
      *
@@ -28,5 +26,5 @@ public class User {
     public String getLastName() {
         return lastName;
     }
-  
+
 }
