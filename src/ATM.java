@@ -88,7 +88,7 @@ public class ATM {
     String newLastName;
     int newPin;
 
-    while (!valid) {
+    while (!validAccount) {
       System.out.print("\nFirst name: ");
       newFirstName = in.next().strip();
 
@@ -101,12 +101,34 @@ public class ATM {
       } else if (newFirstName.equals("-1") || newLastName.equals("-1")) {
         System.out.println("\nExiting account creator...");
         return;
+      } else {
+        validAccount = true;
       }
     }
+    validAccount = false;
+    while (!validAccount) {
+      System.out.print("PIN: ");
+      if(newPin == -1) {
+        return;
+      } else if (newPin < 1000 || newPin > 9999) {
+        System.out.println("Invalid pin entered. The pin must be numerically smaller than 10,000 and numerically greater than 999.");
+        System.out.println("If you would like to exit the account creator, enter -1.");
+        validAccount = false;
+      } else {
+        validAccount = true;
+      }
+    }
+    activeAccount = bank.createAccount(newPin, new User(newFirstName, newLastName));
+    bank.update(activeAccount);
+    bank.save();
   }
 
   public boolean isValidLogin(long accountNo, int pin) {
+    try {
       return accountNo == activeAccount.getAccountNo() && pin == activeAccount.getPin();
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   public int getSelection() {
