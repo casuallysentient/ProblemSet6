@@ -44,8 +44,8 @@ public class ATM {
       System.out.println("Welcome to the AIT ATM!\n");
 
       while (true) {
-          System.out.print("Account No.: ");
-          String newOrReturningUser = in.nextLine();
+          System.out.print("\nAccount No.: ");
+          String newOrReturningUser = in.next();
           if (newOrReturningUser.equals("+")) {
             newAccount();
             if (activeAccount != null) {
@@ -108,6 +108,8 @@ public class ATM {
     validAccount = false;
     while (!validAccount) {
       System.out.print("PIN: ");
+      System.out.println("");
+      newPin = in.nextInt();
       if(newPin == -1) {
         return;
       } else if (newPin < 1000 || newPin > 9999) {
