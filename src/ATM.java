@@ -144,7 +144,7 @@ public class ATM {
   }
 
   public void showBalance() {
-      System.out.println("\nCurrent balance: " + activeAccount.getBalance());
+      System.out.println("\nCurrent balance: " + activeAccount.getBalance() + "\n");
   }
 
   public void deposit() {
@@ -191,9 +191,9 @@ public class ATM {
     } else if (status == ATM.OVERFLOW) {
       System.out.println("\nTransfer rejected. Amount would cause balance to exceed $999,999,999,999.99.");
     } else if (status == ATM.INSUFFICIENT) {
-      System.out.println("\nTransfer rejected. Insufficient funds.");
+      System.out.println("\nTransfer rejected. Insufficient funds.\n");
     } else if (status == ATM.SUCCESS) {
-      System.out.println("\nTransfer accepted.");
+      System.out.println("\nTransfer accepted.\n");
     }
     bank.update(activeAccount);
     try {
