@@ -25,7 +25,7 @@ public class Bank {
     private final static int LAST_NAME_START = 33;
     private final static int LAST_NAME_END = 63;
     private final static int BALANCE_START = 63;
-		private final static double MAX_BALANCE = 999,999,999,999.99;
+		public final static double MAX_BALANCE = 999999999999.99;
 
     private final static String DATA = "data/accounts.dat";    // data file path
 

@@ -34,18 +34,32 @@ public class BankAccount {
         return accountHolder;
     }
 
-    public void deposit(double amount) {
-        balance = balance + amount;
+    public int withdraw(double amount) {
+      if (amount <= 0) {
+          return ATM.INVALID;
+      } else if (amount > balance) {
+          return ATM.INSUFFICIENT;
+      } else {
+          balance = balance - amount;
+          return ATM.SUCCESS;
+      }
     }
 
-    public void withdraw(double amount) {
-        balance = balance - amount;
+    public int deposit(double amount) {
+      if (amount <= 0) {
+          return ATM.INVALID;
+      } else if ((amount + balance) > Bank.MAX_BALANCE) {
+          return ATM.OVERFLOW;
+      } else {
+          balance = balance + amount;
+          return ATM.SUCCESS;
+      }
     }
 
-    public void transfer(BankAccount activeAccount, BankAccount destination, double amount) {
+    public int transfer(BankAccount activeAccount, BankAccount destination, double amount) {
       if (destination == null) {
         return ATM.ACCOUNT_NOT_FOUND;
-      } else if (destination = activeAccount) {
+      } else if (destination == activeAccount) {
         return ATM.RECURSIVE_TRANSFER;
       } else if (amount <= 0) {
         return ATM.INVALID;

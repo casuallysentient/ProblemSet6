@@ -155,7 +155,7 @@ public class ATM {
     System.out.print("\nEnter amount: ");
     double amount = in.nextDouble();
 
-    int status = activeAccount.transfer(activeAccount, destination, amount);
+    int status = activeAccount.transfer(activeAccount, bank.getAccount(destination), amount);
     if (status == ATM.ACCOUNT_NOT_FOUND) {
       System.out.println("\nTransfer rejected. Destination account not found.");
     } else if (status == ATM.RECURSIVE_TRANSFER) {
@@ -169,6 +169,11 @@ public class ATM {
     } else if (status == ATM.SUCCESS) {
       System.out.println("\nTransfer accepted.");
     }
+    bank.update(activeAccount);
+    try {
+        bank.update(bank.getAccount(destination));
+    } catch (Exception e) {}
+    bank.save();
   }
 
   public void shutdown() {
