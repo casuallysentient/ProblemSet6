@@ -107,8 +107,8 @@ public class ATM {
     }
     validAccount = false;
     while (!validAccount) {
-      System.out.print("PIN: ");
-      in.nextLine();
+      System.out.print("\nPIN: ");
+      in.nextLine(); // necessary component, keeps next line from skipping over integer input and causing infinite loop
       newPin = in.nextInt();
       if(newPin == -1) {
         return;
