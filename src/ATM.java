@@ -108,7 +108,7 @@ public class ATM {
     validAccount = false;
     while (!validAccount) {
       System.out.print("PIN: ");
-      System.out.println("");
+      in.nextLine();
       newPin = in.nextInt();
       if(newPin == -1) {
         return;
