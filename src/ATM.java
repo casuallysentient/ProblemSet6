@@ -48,32 +48,36 @@ public class ATM {
           String newOrReturningUser = in.nextLine();
           if (newOrReturningUser.equals("+")) {
             newAccount();
-          }
-          long accountNo = in.nextLong();
-
-          System.out.print("PIN        : ");
-          int pin = in.nextInt();
-
-          if (isValidLogin(accountNo, pin)) {
-              System.out.println("\nHello, again, " + activeAccount.getAccountHolder().getFirstName() + "!\n");
-
-              boolean validLogin = true;
-              while (validLogin) {
-                  switch (getSelection()) {
-                      case VIEW: showBalance(); break;
-                      case DEPOSIT: deposit(); break;
-                      case WITHDRAW: withdraw(); break;
-                      case TRANSFER: transfer(); break;
-                      case LOGOUT: validLogin = false; break;
-                      default: System.out.println("\nInvalid selection.\n"); break;
-                  }
-              }
+            if (activeAccount != null) {
+              System.out.printf("\nThank you. Your account number is %d.\nPlease log in to access your newly created account.\n", activeAccount.getAccountNo());
+            }
           } else {
-              if (accountNo == -1 && pin == -1) {
-                  shutdown();
-              } else {
-                  System.out.println("\nInvalid account number and/or PIN.\n");
-              }
+            long accountNo = Long.valueOf(newOrReturningUser);
+
+            System.out.print("PIN        : ");
+            int pin = in.nextInt();
+
+            if (isValidLogin(accountNo, pin)) {
+                System.out.println("\nHello, again, " + activeAccount.getAccountHolder().getFirstName() + "!\n");
+
+                boolean validLogin = true;
+                while (validLogin) {
+                    switch (getSelection()) {
+                        case VIEW: showBalance(); break;
+                        case DEPOSIT: deposit(); break;
+                        case WITHDRAW: withdraw(); break;
+                        case TRANSFER: transfer(); break;
+                        case LOGOUT: validLogin = false; break;
+                        default: System.out.println("\nInvalid selection.\n"); break;
+                    }
+                }
+            } else {
+                if (accountNo == -1 && pin == -1) {
+                    shutdown();
+                } else {
+                    System.out.println("\nInvalid account number and/or PIN.\n");
+                }
+            }
           }
       }
   }
