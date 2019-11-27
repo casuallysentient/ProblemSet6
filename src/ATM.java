@@ -17,7 +17,11 @@ public class ATM {
   public static final int INSUFFICIENT = 1;
   public static final int SUCCESS = 2;
   public static final int ACCOUNT_NOT_FOUND = 3;
-  public static final int OVERFLOW = 4;
+  public static final int RECURSIVE_TRANSFER = 4;
+  public static final int OVERFLOW = 5;
+
+  public static final int FIRST_NAME_WIDTH = 20;
+  public static final int LAST_NAME_WIDTH = 30;
 
   /**
   * Constructs a new instance of the ATM class.
@@ -116,13 +120,15 @@ public class ATM {
 
   public void transfer() {
     System.out.print("\nEnter account: ");
-    long transferRecipient = in.nextLong();
+    long destination = in.nextLong();
     System.out.print("\nEnter amount: ");
     double amount = in.nextDouble();
 
     int status = activeAccount.transfer(destination, amount);
     if (status == ATM.ACCOUNT_NOT_FOUND) {
-      System.out.println("\nTransfer rejected. Destination account not found.")
+      System.out.println("\nTransfer rejected. Destination account not found.");
+    } else if (status == ATM.RECURSIVE_TRANSFER) {
+      System.out.println("\nTransfer rejected. You can't transfer money to yourself.");
     } else if (status == ATM.INVALID) {
       System.out.println("\nTransfer rejected. Amount must be greater than $0.00.");
     } else if (status == ATM.OVERFLOW) {

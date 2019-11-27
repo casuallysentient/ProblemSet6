@@ -41,6 +41,8 @@ public class BankAccount {
     public void transfer(BankAccount destination, double amount) {
       if (destination == null) {
         return ATM.ACCOUNT_NOT_FOUND;
+      } else if (destination = activeAccount) {
+        return ATM.RECURSIVE_TRANSFER;
       } else if (amount <= 0) {
         return ATM.INVALID;
       } else if (amount > balance) {
