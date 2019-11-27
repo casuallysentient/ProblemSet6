@@ -120,9 +120,15 @@ public class ATM {
     System.out.print("\nEnter amount: ");
     double amount = in.nextDouble();
 
-    int status = activeAccount.transfer(account, amount);
+    int status = activeAccount.transfer(destination, amount);
     if (status == ATM.ACCOUNT_NOT_FOUND) {
       System.out.println("\nTransfer rejected. Destination account not found.")
+    } else if (status == ATM.INVALID) {
+      System.out.println("\nTransfer rejected. Amount must be greater than $0.00.");
+    } else if (status == ATM.MAXIMUM_VALUE) {
+      System.out.println("\nTransfer rejected. Amount would cause balance to exceed $999,999,999,999.99.");
+    } else if (status == ATM.INSUFFICIENT) {
+      System.out.println("\nTransfer rejected. Insufficient funds.");
     }
   }
 
