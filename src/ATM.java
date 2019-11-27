@@ -56,7 +56,7 @@ public class ATM {
 
             System.out.print("PIN        : ");
             int pin = in.nextInt();
-
+            activeAccount = bank.login(accountNo, pin);
             if (isValidLogin(accountNo, pin)) {
                 System.out.println("\nHello, again, " + activeAccount.getAccountHolder().getFirstName() + "!\n");
 
@@ -84,9 +84,9 @@ public class ATM {
 
   public void newAccount() {
     boolean validAccount = false;
-    String newFirstName;
-    String newLastName;
-    int newPin;
+    String newFirstName = "";
+    String newLastName = "";
+    int newPin = 0;
 
     while (!validAccount) {
       System.out.print("\nFirst name: ");
@@ -152,6 +152,8 @@ public class ATM {
       int status = activeAccount.deposit(amount);
       if (status == ATM.INVALID) {
           System.out.println("\nDeposit rejected. Amount must be greater than $0.00.\n");
+      } else if (status == ATM.OVERFLOW) {
+          System.out.println("\nDeposit rejected. Amount would cause balance to exceed $999,999,999,999.99.");
       } else if (status == ATM.SUCCESS) {
           System.out.println("\nDeposit accepted.\n");
       }
