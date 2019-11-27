@@ -39,9 +39,19 @@ public class BankAccount {
     }
 
     public void transfer(BankAccount destination, double amount) {
-      if(destination == null) {
+      if (destination == null) {
         return ATM.ACCOUNT_NOT_FOUND;
-      } else if()
+      } else if (amount <= 0) {
+        return ATM.INVALID;
+      } else if (amount > balance) {
+        return ATM.INSUFFICIENT;
+      } else if (amount + destination.balance > Bank.MAX_BALANCE) {
+        return ATM.MAX_BALANCE_REACHED;
+      } else {
+        balance = balance - amount;
+        destination.balance = destination.balance + amount;
+        return ATM.SUCCESS;
+      }
     }
 
     /*

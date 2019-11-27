@@ -17,7 +17,7 @@ public class ATM {
   public static final int INSUFFICIENT = 1;
   public static final int SUCCESS = 2;
   public static final int ACCOUNT_NOT_FOUND = 3;
-  public static final int MAXIMUM_VALUE = 4;
+  public static final int MAX_BALANCE_REACHED = 4;
 
   /**
   * Constructs a new instance of the ATM class.
@@ -125,10 +125,12 @@ public class ATM {
       System.out.println("\nTransfer rejected. Destination account not found.")
     } else if (status == ATM.INVALID) {
       System.out.println("\nTransfer rejected. Amount must be greater than $0.00.");
-    } else if (status == ATM.MAXIMUM_VALUE) {
+    } else if (status == ATM.MAX_BALANCE_REACHED) {
       System.out.println("\nTransfer rejected. Amount would cause balance to exceed $999,999,999,999.99.");
     } else if (status == ATM.INSUFFICIENT) {
       System.out.println("\nTransfer rejected. Insufficient funds.");
+    } else if (status == ATM.SUCCESS) {
+      System.out.println("\nTransfer accepted.");
     }
   }
 
