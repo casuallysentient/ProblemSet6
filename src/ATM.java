@@ -45,6 +45,10 @@ public class ATM {
 
       while (true) {
           System.out.print("Account No.: ");
+          String newOrReturningUser = in.nextLine();
+          if (newOrReturningUser.equals("+")) {
+            newAccount();
+          }
           long accountNo = in.nextLong();
 
           System.out.print("PIN        : ");
@@ -72,6 +76,21 @@ public class ATM {
               }
           }
       }
+  }
+
+  public void newAccount() {
+    boolean validAccount = false;
+    String newFirstName;
+    String newLastName;
+    int newPin;
+
+    while (!valid) {
+      System.out.print("\nFirst name: ");
+      newFirstName = in.next().strip();
+
+      System.out.print("\nLast name: ");
+      newLastName = in.next().strip();
+    }
   }
 
   public boolean isValidLogin(long accountNo, int pin) {
